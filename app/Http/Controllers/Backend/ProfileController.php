@@ -57,15 +57,10 @@ class ProfileController extends Controller
             'old_password' => 'required',
             'password' => 'required|confirmed'
         ]);
-        $notification = array(
-            'message' => 'User updated successfully',
-            'alert-type' => 'success'
-        );
 
         $currentPassword  = Auth::user()->password;
         if (Hash::check($request->password, $currentPassword)) {
             $user = User::find(Auth::id());
-            // dd($user);
             $user->password = Hash::make($request->password);
             $user->save();
             Auth::logout();

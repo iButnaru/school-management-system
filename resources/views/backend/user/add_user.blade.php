@@ -25,11 +25,10 @@
                                                 <div class="form-group">
                                                     <h5>User Role <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <select name="user_type" id="select" required
-                                                            class="form-control">
+                                                        <select name="role" id="role" required class="form-control">
                                                             <option value="" selected disabled>Select Role</option>
                                                             <option value="admin">Admin</option>
-                                                            <option value="user">User</option>
+                                                            <option value="operator">Operator</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -52,12 +51,12 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <h5>User Password<span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <input type="password" name="password" class="form-control">
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>

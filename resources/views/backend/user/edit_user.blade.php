@@ -29,10 +29,11 @@
                                                             class="form-control">
                                                             <option value="" selected disabled>Select Role</option>
                                                             <option value="admin"
-                                                                {{ $user->user_type== 'admin' ? "selected" : "" }}>Admin
+                                                                {{ $user->role== 'admin' ? "selected" : "" }}>Admin
                                                             </option>
-                                                            <option value="user"
-                                                                {{ $user->user_type == 'user' ? "selected" : "" }}>User
+                                                            <option value="operator"
+                                                                {{ $user->role == 'operator' ? "selected" : "" }}>
+                                                                Operator
                                                             </option>
                                                         </select>
                                                     </div>

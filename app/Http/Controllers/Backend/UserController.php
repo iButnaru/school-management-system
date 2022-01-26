@@ -12,7 +12,7 @@ class UserController extends Controller
     public function viewUsers()
     {
         // $users = User::all();
-        $data['allData'] = User::all();
+        $data['allData'] = User::where('user_type', 'admin')->get();
         return view('backend.user.view_user',  $data);
     }
 
@@ -28,20 +28,28 @@ class UserController extends Controller
             'email' => 'required',
         ]);
 
-        $user = new User([
-            'name' => $request->name,
-            'user_type' => $request->user_type,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
+        // [
+        //     'code' => rand(0000, 9999),
+        //     'name' => $request->name,
+        //     'user_type' => 'admin',
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
+        // ]
+        $user = new User();
+        $code = rand(0000, 9999);
+        $user->name = $request->name;
+        $user->user_type = 'admin';
+        $user->role = $request->role;
+        $user->email = $request->email;
+        $user->password = Hash::make($code);
+        $user->code =   $code;
         $notification = array(
             'message' => 'User inserted successfully',
             'alert-type' => 'success'
         );
 
         $user->save();
-        return redirect()->route('user.view')->with($notification);
+        return redirect()->route('users.view')->with($notification);
     }
 
     public function getEdit(User $user)
@@ -53,14 +61,14 @@ class UserController extends Controller
     {
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->user_type = $request->user_type;
+        $user->role = $request->role;
         $user->update();
 
         $notification = array(
             'message' => 'The user has been updated.',
             'alert-type' => 'info'
         );
-        return redirect()->route('user.view')->with($notification);
+        return redirect()->route('users.view')->with($notification);
     }
 
     public function deleteUser(User $user)
@@ -71,6 +79,6 @@ class UserController extends Controller
             'alert-type' => 'error',
         );
 
-        return redirect()->route('user.view')->with($notification);
+        return redirect()->route('users.view')->with($notification);
     }
 }
